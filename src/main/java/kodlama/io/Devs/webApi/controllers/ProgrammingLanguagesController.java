@@ -35,7 +35,7 @@ public class ProgrammingLanguagesController {
 		this.programmingLanguageService.update(programmingLanguage);
 	}
 
-	@GetMapping("getall")
+	@GetMapping("/getall")
 	public List<ProgrammingLanguage> getAll() {
 
 		return this.programmingLanguageService.getAll();

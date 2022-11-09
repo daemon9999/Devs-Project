@@ -2,6 +2,7 @@ package kodlama.io.Devs.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
@@ -13,6 +14,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService{
 	
 	private ProgrammingLanguageRepository programmingLanguageRepository;
 	
+	@Autowired
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
 		this.programmingLanguageRepository = programmingLanguageRepository;
 	}
@@ -26,28 +28,30 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService{
 				return;
 			}
 		}
-		this.programmingLanguageRepository.add(programmingLanguage);
+		this.programmingLanguageRepository.save(programmingLanguage);
 	}
 
 	@Override
 	public void delete(int id) {
-		this.programmingLanguageRepository.delete(id);
+		this.programmingLanguageRepository.deleteById(id);
 	}
 
 	@Override
 	public void update(ProgrammingLanguage programmingLanguage) {
-		this.programmingLanguageRepository.update(programmingLanguage);
+		int id = programmingLanguage.getId();
+		String newName = programmingLanguage.getName();
+		this.programmingLanguageRepository.update(newName, id);
 	}
 
 	@Override
 	public List<ProgrammingLanguage> getAll() {
 
-		return this.programmingLanguageRepository.getAll();
+		return this.programmingLanguageRepository.findAll();
 	}
 
 	@Override
 	public ProgrammingLanguage getById(int id) {
-		return this.programmingLanguageRepository.getById(id);
+		return this.programmingLanguageRepository.findById(id);
 	}
 
 }
